@@ -11,11 +11,13 @@ int main()
     ifstream inputFile("RpnData.txt");
     ofstream outputFile("results.txt");
 
-    if (!inputFile) {
+    if (!inputFile) 
+    {
         cerr << "Error: Unable to open input file." << endl;
         return 1;
     }
-    if (!outputFile) {
+    if (!outputFile) 
+    {
         cerr << "Error: Unable to open output file." << endl;
         return 1;
     }
@@ -23,7 +25,8 @@ int main()
     binaryExpressionTree expressionTree;
     string postfixExpr;
 
-    while (getline(inputFile, postfixExpr)) {
+    while (getline(inputFile, postfixExpr)) 
+    {
         expressionTree.buildExpressionTree(postfixExpr);
         double result = expressionTree.evaluateExpressionTree();
         outputFile << "Result: " << result << endl;

@@ -1,24 +1,43 @@
 #pragma once
 
-#include "binaryTree.h"
+#include "binaryTree.h" 
 #include <stack>
-#include <cstring>
-#include <string>
-#include <iostream>
-
-using namespace std;
 
 class binaryExpressionTree : public binaryTreeType<string>
 {
+private:
+    // create a new node with the given info
+    // precondition - info is a valid string
+    // postcondition - a new node with the provided info is created and returned
+    nodeType<string>* createNode(const string& info);
+
+    // parse the postfix expression and build the tree
+    // precondition - postfixExpr is a valid postfix expression string
+    // postcondition - The expression tree representing the postfix expression is built
+    void parseAndBuildTree(const string& postfixExpr);
+
+protected:
+    // Stack to store intermediate nodes during tree construction
+    stack<nodeType<string>*> nodeStack;
+
 public:
-    // Default constructor
+    // default constructor
     binaryExpressionTree();
 
-    // Function to build an expression tree from a postfix expression
+    // build an expression tree from a postfix expression
+    // precondition - postfixExpr is a valid postfix expression string
+    // postcondition - expression tree representing the postfix expression is built
     void buildExpressionTree(const string& postfixExpr);
 
-    // Function to evaluate the expression tree
+    // evaluate the expression tree
+    // precondition - expression tree has been built
+    // postcondition - result of the expression tree evaluation is returned
     double evaluateExpressionTree();
+
+    // recursive function to evaluate the expression tree
+    // precondition - p points to a valid node in the expression tree
+    // postcondition - The result of evaluating the subtree rooted at p is returned
+    double evaluateExpressionTree(nodeType<string>* p);
 
     // Function to determine if searchItem is in the binary tree.
     // Postcondition: Returns true if searchItem is found in the binary tree; otherwise, returns false.
@@ -34,20 +53,4 @@ public:
     // it is deleted from the binary tree. If the binary tree is empty or deleteItem is not in the binary tree, 
     // an appropriate message is printed.
     void deleteNode(const string& deleteItem) override;
-
-
-protected:
-    // Helper function to create a node with the given info
-    nodeType<string>* createNode(const string& info);
-
-    // Helper function to parse the postfix expression and build the tree
-    void parseAndBuildTree(const string& postfixExpr);
-
-    // Recursive function to evaluate the expression tree
-    double evaluateExpressionTree(nodeType<string>* p);
-
-private:
-    // Stack to store tree nodes during tree construction
-    stack<nodeType<string>*> nodeStack;
 };
-
